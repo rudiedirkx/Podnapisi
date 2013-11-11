@@ -1,0 +1,23 @@
+{
+	"name": "Podnapisi subtitle download",
+	"version": "1.8",
+	"manifest_version": 2,
+
+	"description": "Download buttons & Next episode & Release names & Focus styles for Podnapisi subtitles",
+	"icons": {
+		"128": "logo_128.png",
+		"48": "logo_48.png"
+	},
+
+	"content_scripts": [{
+		"all_frames": true,
+		"js": [ "podnapisi.js" ],
+		"matches": [ "http://www.podnapisi.net/*" ]
+	}],
+	"web_accessible_resources": [
+		"download.png",
+		"downloaded.png",
+		"loading.gif",
+		"domready.js"
+	]
+}
