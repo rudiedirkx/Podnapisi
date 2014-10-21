@@ -93,12 +93,12 @@ A(document.querySelectorAll('div.list_div2 a')).forEach(function(a, i) {
 		if ( !this.downloaded ) {
 			this.firstChild.src = img_ld
 			var a3 = this
-console.log(a3.href);
+// console.log(a3.href);
 			get(a3.href, function(t) {
-				var m = t.match(/"(\/en\/ppodnapisi\/download\/\i\/\d+\/k\/[a-f0-9]{30,40})"/i)
-console.log(m)
+				var m = t.match(/"(\/[a-z]+\/ppodnapisi\/predownload\/i\/\d+\/k\/[a-z0-9]+)"/i);
+// console.log(m)
 				var dlUrl = m[1];
-console.log(dlUrl);
+// console.log(dlUrl);
 				a3.downloaded = true;
 				a3.href = dlUrl;
 				dl(dlUrl);
