@@ -90,15 +90,15 @@ A(document.querySelectorAll('div.list_div2 a')).forEach(function(a, i) {
 	a2.onclick = function(e) {
 		e.preventDefault();
 
-		if ( !this.downloaded ) {
+		if ( this.downloaded ) {
+			dl(this.href);
+		}
+		else {
 			this.firstChild.src = img_ld
 			var a3 = this
-// console.log(a3.href);
 			get(a3.href, function(t) {
 				var m = t.match(/"(\/[a-z]+\/ppodnapisi\/predownload\/i\/\d+\/k\/[a-z0-9]+)"/i);
-// console.log(m)
 				var dlUrl = m[1];
-// console.log(dlUrl);
 				a3.downloaded = true;
 				a3.href = dlUrl;
 				dl(dlUrl);
