@@ -128,7 +128,7 @@ A(document.querySelectorAll('div.list_div2 a')).forEach(function(a, i) {
 
 
 function doScript(js) {
-	js = 'jQuery(function($) { ' + js + ' });';
+	js = 'jQuery(function($) { setTimeout(function() { ' + js + ' }, 1); });';
 	var script = document.createElement('script');
 	script.innerHTML = js;
 	document.body.appendChild(script);

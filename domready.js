@@ -1,7 +1,7 @@
 
 // Next episode
-jQuery('#series-search').find('button').parent().append('<a id="-next-episode" href="#">&gt;&gt; next &gt;&gt;</a>');
-jQuery('#-next-episode').click(function(e) {
+$('#series-search').find('button').parent().append('<a id="-next-episode" href="#">&gt;&gt; next &gt;&gt;</a>');
+$('#-next-episode').click(function(e) {
 	e.preventDefault();
 	var $sTE = document.querySelector('input[name="sTE"]');
 	$sTE.value = parseInt($sTE.value) + 1;
@@ -17,3 +17,12 @@ $(".release").each(function(i, obj) {
 	$obj.removeData("tooltip").unbind("hover mouseover mouseout");
 });
 $('.tooltip').hide();
+
+// Focus right tab
+var q = (function(p,o){o={};p.forEach(function(x){x=x.split('=');o[x[0]]=x[1];});return o;})(location.search.substr(1).split('&'));
+if ( q.sT == '0') {
+	$('a[href="#movies-search"]').click();
+}
+else if ( q.sT == '1' ) {
+	$('a[href="#series-search"]').click();
+}
