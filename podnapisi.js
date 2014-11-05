@@ -63,9 +63,9 @@ function dl(url) {
 
 
 
-var img_dl = chrome.extension.getURL('download.png'),
-	img_ld = chrome.extension.getURL('loading.gif'),
-	img_dd = chrome.extension.getURL('downloaded.png'),
+var img_dl = chrome.extension.getURL('images/download.png'),
+	img_ld = chrome.extension.getURL('images/loading.gif'),
+	img_dd = chrome.extension.getURL('images/downloaded.png'),
 	dl_cache = {};
 
 // Download buttons

@@ -15,9 +15,9 @@
 		"matches": [ "http://www.podnapisi.net/*" ]
 	}],
 	"web_accessible_resources": [
-		"download.png",
-		"downloaded.png",
-		"loading.gif",
+		"images/download.png",
+		"images/downloaded.png",
+		"images/loading.gif",
 		"domready.js"
 	]
 }
