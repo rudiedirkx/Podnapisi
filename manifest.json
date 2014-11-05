@@ -3,7 +3,7 @@
 	"version": "1.9",
 	"manifest_version": 2,
 
-	"description": "Download buttons & Next episode & Release names & Focus styles for Podnapisi subtitles",
+	"description": "Download buttons & Next episode & Release names for Podnapisi subtitles",
 	"icons": {
 		"128": "logo_128.png",
 		"48": "logo_48.png"

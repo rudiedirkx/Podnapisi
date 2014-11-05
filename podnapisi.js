@@ -76,13 +76,16 @@ A(document.querySelectorAll('div.list_div2 a')).forEach(function(a, i) {
 	}
 
 	var tr = a.parent('tr');
-	var img = tr.cells[0].getElementsByTagName('img')[0];
+
+	// Remove native download icon
+	var img = tr.cells[0].querySelector('img');
 	img.parentNode.removeChild(img);
 
-	// download cell
+	// Create new download cell
 	var td = tr.insertCell(1);
 	td.align = 'center';
 
+	// Create and append download link/icon with click handler
 	var a2 = document.createElement('a');
 	var st_id = a.attr('href').match(/(\d+)$/)[1];
 	a2.attr('href', a.attr('href'));
@@ -116,28 +119,6 @@ A(document.querySelectorAll('div.list_div2 a')).forEach(function(a, i) {
 	};
 	td.appendChild(a2);
 
-	// rating cell
-	var rtd = tr.cells[tr.cells.length-1], imgs = A(rtd.childNodes);
-	var rating = 0;
-	imgs.forEach(function(img, i) {
-		if ( img.nodeName === 'IMG' ) {
-			rating += 2;
-			var a = document.createElement('a');
-			a.href = '/ppodnapisi/oceni/i/' + st_id + '/ocena/' + rating;
-			a.onclick = function(e) {
-				e.preventDefault();
-				get(this.href, function(t) {
-					rtd.innerHTML = 'voted...';
-				});
-			};
-			a.appendChild(img);
-			rtd.appendChild(a);
-		}
-		else {
-			rtd.removeChild(img);
-		}
-	});
-
 });
 
 
@@ -155,10 +136,8 @@ function doScript(js) {
 
 var file = chrome.extension.getURL('domready.js');
 var xhr = new XMLHttpRequest;
-xhr.onreadystatechange = function(e) {
-	if (this.readyState == 4 && this.status == 200) {
-		doScript(this.responseText);
-	}
+xhr.onload = function(e) {
+	doScript(this.responseText);
 };
 xhr.open('GET', file, true);
 xhr.send();
