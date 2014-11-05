@@ -83,32 +83,37 @@ A(document.querySelectorAll('div.list_div2 a')).forEach(function(a, i) {
 	var td = tr.insertCell(1);
 	td.align = 'center';
 
-	var a2 = document.createElement('a')
-	var st_id = a.attr('href').match(/(\d+)$/)[1]
-	a2.attr('href', a.attr('href'))
-	a2.innerHTML = '<img src="' + img_dl + '" width="17" height="16" />'
+	var a2 = document.createElement('a');
+	var st_id = a.attr('href').match(/(\d+)$/)[1];
+	a2.attr('href', a.attr('href'));
+	a2.innerHTML = '<img src="' + img_dl + '" width="17" height="16" />';
+	a2.originalA = a;
 	a2.onclick = function(e) {
-		e.preventDefault();
+		if ( !this.downloaded ) {
+			e.preventDefault();
 
-		if ( this.downloaded ) {
-			dl(this.href);
+			this.firstChild.src = img_ld;
+			get(this.href, (function(html1) {
+				var m1 = html1.match(/"(\/[a-z]+\/ppodnapisi\/(?:pre)?download\/i\/\d+\/k\/([a-z0-9]+))"/i);
+				var dlUrl = m1[1];
+				dlUrl = dlUrl.replace('predownload', 'download');
+
+				var hash = m1[2];
+
+				this.downloaded = true;
+				this.href = dlUrl;
+				this.firstChild.src = img_dd;
+
+				var title = this.originalA.parent('td').innerText.trim().replace(/\s+/g, ' ');
+				title = title.replace(/[^a-z0-9.()-]/ig, ' ').trim();
+
+				this.target = '_blank';
+				this.download = title + '.zip';
+				this.title = 'Download: ' + this.download;
+				this.click();
+			}).bind(this));
 		}
-		else {
-			this.firstChild.src = img_ld
-			var a3 = this
-			get(a3.href, function(t) {
-				var m = t.match(/"(\/[a-z]+\/ppodnapisi\/predownload\/i\/\d+\/k\/[a-z0-9]+)"/i);
-				var dlUrl = m[1];
-				a3.downloaded = true;
-				a3.href = dlUrl;
-				dl(dlUrl);
-				a3.firstChild.src = img_dd;
-			})
-		}
-
-		return false
-	}
-
+	};
 	td.appendChild(a2);
 
 	// rating cell
